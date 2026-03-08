@@ -27,7 +27,7 @@
 							
 			2018年にソフトウェア工学の修士課程を修了しました。
 卒業後は中学校で外国語指導助手として勤務しました。この経験から、生徒とコミュニケーションを取ることや英語の楽しさを伝えることを得意としています。
-勤務するとともに、プログラミングの技術を磨くために、趣味でアプリやゲームを制作しています。時にデータ活用のアプリ開発や複雑なゲームプログラミングが得意です。
+勤務するとともに、プログラミングの技術を磨くために、趣味でアプリやゲームを自作しています。時にデータ活用のアプリ開発や複雑なゲームプログラミングが得意です。
 また、GPT2の登場から生成AI研究・実験、活用するプログラムの実装も経験があります。
 			
 			下手な日本語はすみません。
@@ -52,7 +52,7 @@
 	<div class="entry">
 		<div class="year">2018</div>
 		<div class="details">
-			アベリストウィス大学 ソフト工学の修士号 卒業
+			アベリストウィス大学 ソフト工学の修士号 終了
 		</div>
 	</div>
 
@@ -101,7 +101,7 @@
 			<h3>技術 / 言語</h3>
 			<ul class="skill-list">
 				<li>C#</li>
-				<li>C++（ちょびっと）</li>
+				<li>C++</li>
 				<li>JavaScript (ブラウザー、NodeJS)</li>
 				<li>HTML5 / CSS</li>
 				<li>Lua</li>
@@ -116,7 +116,8 @@
 				<li>ゲームソフト制作</li>
 				<li>ゲーム用ネットワーク技術</li>
 				<li>3Dグラフィックス</li>
-				<li>3Dアニメーション（初心者）</li>
+				<li>3Dアニメーション（初心者）/li>
+				<li>生成AIの使用</li>
 			</ul>
 		</div>
 
@@ -141,46 +142,66 @@
 	-->
 	
 	<div class="project">
-		<h3>TRPGのデータ管理アプリ</h3>
+		<h3>TRPGのユーザーデータ管理アプリ</h3>
 		<p class="desc">
-			NW.jsを活用してデータ管理のアプリ。
-			ウエブテクノロジーでデスクトップアプリを作成しました。
+			NW.jsを利用したデータ管理アプリです。
+			ウエブ技術を用いてデスクトップアプリを作成しました。
 		</p>
 		
 		<p class="links">
-			<a href="sosmanager1.png">映像１</a>
-			<a href="sosmanager2.png">映像２</a>
+			<a href="sosmanager1.png">画面キャプチャ１</a>
+			<a href="sosmanager2.png">画面キャプチャ２</a>
 			<a href="https://github.com/botchi09/sos-equipment-manager">GitHub</a>
 		</p>
 	</div>
 	
 	<div class="project">
-		<h3>ロールバック・ネットワーク</h3>
+		<h3>ロールバック方式ネットコードの実装</h3>
 		<p class="desc">
-			格闘ゲームは活用しているロールバック式ネットコードを実装しました。
-			下手なアニメーションやゲームシステムも作成の実装。
-			ロックステップネットコード式より操作レスポンスが優れています。
+			格闘ゲームで主流になっている「ロールバック方式ネットコード」を実装しました。
+			
+			アニメーションやゲームシステムも自作しました。
+			「ロックステップ」方式ネットコードに比べ、操作レスポンスに優れています。
 			
 		</p>
 				
 		<p class="links">
-			<a class="" href="https://youtu.be/f2O9HNqwWwM">映像１</a>
-			<a class="" href="https://youtu.be/pjLEUBSBpmo">映像２</a>
+			<a class="" href="https://youtu.be/f2O9HNqwWwM">デモ映像１</a>
+			<a class="" href="https://youtu.be/pjLEUBSBpmo">デモ映像２</a>
 
 			<a href="https://github.com/botchi09/RobloxRollback">GitHub</a>
 		</p>
 	</div>
 	
 	<div class="project">
-		<h3>スクレイピングツール</h3>
+		<h3>特定サイト向け自動情報取得ツール</h3>
 		<p class="desc">
-			NodeJSでスクレイピングツールを作成しました。
-			「Puppeteer」というライブラリでウエブサイトの情報の取得。
+			Node.jsとPuppeteerを用いて、特定のウエブサイトの情報の自動取得プログラムです。
+			これまでのデータ入力作業を自動化しました。
 		</p>
 		
 		<p class="links">
-			<a href="scraper.png">実施中の写真</a>
+			<a href="scraper.png">画面キャプチャ</a>
 			<a href="https://github.com/botchi09/stone-website-puppeteer-scraper">GitHub</a>
+		</p>
+	</div>
+	
+	
+	<div class="project">
+		<h3>生成AIによるモデリングの実験</h3>
+		<p class="desc">
+			大規模言語モデル（LLM）を使って、CGやゲームレベルを作成する実験を行いました。
+			現在のLLMの空間認識の能力を理解するために調査しました。
+			自分で考えたプロンプトを使って、複数のLLMにCGを生成させました。
+			プロンプトを研究してよい結果が得られるように調整しました。
+			AIエージェントが生成できるようにAI向けAPIを作りました。
+			調査したAIモデル：Gemini 3.1 Pro・Claude Sonnet 4.6・ChatGPT 5.2・Qwen 3.5 27B
+			
+		</p>
+				
+		<p class="links">
+			<a href="prompt_results.png">デモ画面</a>
+
 		</p>
 	</div>
 	
@@ -200,17 +221,17 @@
 	
 	
 	<div class="project">
-		<h3>魔法使いゲームプロトタイプ</h3>
+		<h3>魔法使いアクションゲームのプロトタイプ</h3>
 		<p class="desc">
-			「アーマード・コア」に影響を受けて、魔法使いバトルゲームのプロトタイプ。
-			エンティティ・コンポーネント・システム（ECS）ですばやく簡単に技を実装しました。
-			カメラとキャラクターの操作も作成しました。			
+			「アーマード・コア」シリーズに影響を受けて魔法使い対戦ゲームのプロトタイプを自作しました。
+			ECS（エンティティ・コンポーネント・システム）で,簡単に技を実装できるようにしました。
+			カメラやキャラクター操作も自作しました。
 		</p>
 		
 		<p class="links">
-			<a href="spelldefexample.png">コードの例</a>
-			<a href="https://www.youtube.com/watch?v=XVLZ9_kiFl0">映像１</a>
-			<a href="https://www.youtube.com/watch?v=5HVhadBwj20">映像２</a>
+			<a href="spelldefexample.png">フレームワークの実装例</a>
+			<a href="https://www.youtube.com/watch?v=XVLZ9_kiFl0">デモ映像１</a>
+			<a href="https://www.youtube.com/watch?v=5HVhadBwj20">デモ映像２</a>
 			<a href="https://github.com/botchi09/rblx-spellcasting-behavior-framework">GitHub</a>
 		</p>
 	</div>
@@ -218,7 +239,8 @@
 	<div class="project">
 		<h3>エクセルとワードのファイルをデータ編集</h3>
 		<p class="desc">
-			エクセルのファイルを読んで、テンプレートでワードのファイルの作成のプログラム。
+			Node.jsでエクセルファイルを読み込み、テンプレートを用いてワードファイルにデータを流し込むプログラムです。
+			
 		</p>
 		
 		<p class="links">
@@ -227,10 +249,10 @@
 	</div>
 	
 	<div class="project">
-		<h3>リフレクションでゲームのMOD</h3>
+		<h3>Unityゲーム向けMODの拡張</h3>
 		<p class="desc">
-			GitHubのリポジトリをフォークして、UnityのゲームのMODを作りました。
-			リフレクションでC#を用いているゲームを改造しました。			
+			GitHub上の既存のオープンソースMODをフォークして、C#のリフレクションライブラリを用いてゲームソフトに機能拡張や調整をしました。
+					
 		</p>
 		
 		<p class="links">

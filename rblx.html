@@ -1,6 +1,244 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ホケット　ライアン・ポートフォリオ</title>
+	<link rel="stylesheet" href="main.css">
 </head>
+
 <body>
+
+<header class="top">
+	<div class="top-inner">
+		<div class="name">
+			<h1>ホケット・ライアン</h1>
+			<p class="contact">
+				電話: 080-7891-9471　
+				メール: rhockett94@gmail.com　（メール優先）
+			</p>
+			
+			<p class="languages">
+			英語のネイティブ（イギリス人）　|　日本語 (独学、勉強中)
+			</p>
+			
+		
+		</div>
+
+		<nav>
+			<!--a href="#education">学歴</a>
+			<a href="#work">職歴</a-->
+			<a href="#skills">スキル</a>
+			<a href="#portfolio">ポートフォリオ</a>
+		</nav>
+	</div>
+</header>
+
+<main>
+
+<section id="skills">
+	<h2>スキル</h2>
+
+	<div class="skills-grid">
+
+		<div class="skill-group">
+			<h3>技術 / 言語</h3>
+			<ul class="skill-list">
+				<li>C#・Java</li>
+				<li>JavaScript (ブラウザー、NodeJS)</li>
+				<li>HTML5 / CSS</li>
+				<li>Lua / Luau</li>
+
+			</ul>
+		</div>
+
+		<div class="skill-group">
+			<h3>業務・分野</h3>
+			<ul class="skill-list">
+				<li>ブラウザオートメーション</li>
+				<li>ゲームソフト制作</li>
+				<li>ゲーム用ネットワーク技術</li>
+				<li>3Dグラフィックス</li>
+				<li>3Dアニメーション（初心者）</li>
+				<li>生成AIの使用</li>
+			</ul>
+		</div>
+
+	</div>
+</section>
+<section id="portfolio">
+	<h2>ポートフォリオ</h2>
+	<!--
+	<div class="project">
+		<h3>プロジェクト名</h3>
+		<p class="desc">
+			ここに簡単な説明を書きます。何を作ったのか、目的、特徴など。
+		</p>
+		<p class="tech">
+			使用技術: HTML / CSS / JavaScript
+		</p>
+		<p class="links">
+			<a href="#">デモ</a>
+			<a href="#">ソースコード</a>
+		</p>
+	</div>
+	-->
+	
+	
+	
+	
+	
+	<div class="project">
+		<h3>魔法使いアクションゲームのプロトタイプ</h3>
+		<p class="desc">
+			「アーマード・コア」シリーズに影響を受けて魔法使い対戦ゲームのプロトタイプを自作しました。
+			ECS（エンティティ・コンポーネント・システム）で,簡単に技を実装できるようにしました。
+			カメラやキャラクター操作も自作しました。
+		</p>
+		
+		<p class="links">
+			<a href="spelldefexample.png">フレームワークの実装例</a>
+			<a href="https://www.youtube.com/watch?v=XVLZ9_kiFl0">デモ映像１</a>
+			<a href="https://www.youtube.com/watch?v=5HVhadBwj20">デモ映像２</a>
+			<a href="https://github.com/botchi09/rblx-spellcasting-behavior-framework">GitHub</a>
+		</p>
+	</div>
+	
+	<div class="project ">
+		<h3>ボルダリングゲーム</h3>
+		<p class="desc">
+			宝石を拾い、柱を登るゲームです。いわゆる、縦向きの障害物コースゲームです。12月中旬にベータ版を公開しました。 マトリクス数学を使用し、プレイヤーの手がスムーズに動きながら障害物を乗り越えていくようにしました。
+		</p>
+		
+		<p class="links">
+			<a href="https://youtu.be/bYzrbGG2mxw">映像１</a>
+			<a href="https://youtu.be/_mRu7jwwfPQ">映像２</a>
+			<!--a href="https://github.com/botchi09/rblx-climb-game-framework">GitHub</a-->
+		</p>
+	</div>
+	
+	
+	<div class="project">
+		<h3>ブロック工場</h3>
+		<p class="desc">
+			ブロックを掘り、加工して売るゲームです。 サーフェスネットを使用し、EditableMeshでボクセル形状を自由に変更することができます。 
+			UVマップを計算することでさまざまな種類のブロックを表示できます。
+		</p>
+		
+		<p class="links">
+			<a href="https://youtu.be/gCMYRTG_4xU">映像</a>
+		</p>
+	</div>
+	
+	<div class="project">
+		<h3>ハムスターボール決闘</h3>
+		<p class="desc">
+			Robloxのサーバー主導システムを使用し、ハムスターボールで対戦するゲームです。 ラグを感じにくい体験のために、プレイヤーの能力を工夫しました。
+		</p>
+		
+		<p class="links">
+			<a href="https://youtu.be/L8BhFeAakAs">映像</a>
+			
+		</p>
+	</div>
+	
+	
+	<div class="project">
+		<h3>生成AIによるモデリングの実験</h3>
+		<p class="desc">
+			大規模言語モデル（LLM）を使って、CGやゲームレベルを作成する実験を行いました。
+			現在のLLMの空間認識の能力を理解するために調査しました。
+			自分で考えたプロンプトを使って、複数のLLMにCGを生成させました。
+			プロンプトを研究してよい結果が得られるように調整しました。
+			AIエージェントが生成できるようにAI向けAPIを作りました。
+			調査したAIモデル：Gemini 3.1 Pro・Claude Sonnet 4.6・ChatGPT 5.2・Qwen 3.5 27B
+			
+		</p>
+				
+		<p class="links">
+			<a href="prompt_results.png">デモ画面</a>
+
+		</p>
+	</div>
+	
+	<div class="project">
+		<h3>ロールバック方式ネットコードの実装</h3>
+		<p class="desc">
+			格闘ゲームで主流になっている「ロールバック方式ネットコード」を実装しました。
+			
+			アニメーションやゲームシステムも自作しました。
+			「ロックステップ」方式ネットコードに比べ、操作レスポンスに優れています。
+			
+		</p>
+				
+		<p class="links">
+			<a class="" href="https://youtu.be/f2O9HNqwWwM">デモ映像１</a>
+			<a class="" href="https://youtu.be/pjLEUBSBpmo">デモ映像２</a>
+
+			<a href="https://github.com/botchi09/RobloxRollback">GitHub</a>
+		</p>
+	</div>
+	
+	<div class="project">
+		<h3>特定サイト向け自動情報取得ツール</h3>
+		<p class="desc">
+			Node.jsとPuppeteerを用いて、特定のウエブサイトの情報の自動取得プログラムです。
+			これまでのデータ入力作業を自動化しました。
+		</p>
+		
+		<p class="links">
+			<a href="scraper.png">画面キャプチャ</a>
+			<a href="https://github.com/botchi09/stone-website-puppeteer-scraper">GitHub</a>
+		</p>
+	</div>
+	
+	<div class="project">
+		<h3>TRPGのユーザーデータ管理アプリ</h3>
+		<p class="desc">
+			NW.jsを利用したデータ管理アプリです。
+			ウエブ技術を用いてデスクトップアプリを作成しました。
+		</p>
+		
+		<p class="links">
+			<a href="sosmanager1.png">画面キャプチャ１</a>
+			<a href="sosmanager2.png">画面キャプチャ２</a>
+			<a href="https://github.com/botchi09/sos-equipment-manager">GitHub</a>
+		</p>
+	</div>
+	
+
+	<div class="project">
+		<h3>エクセルとワードのファイルをデータ編集</h3>
+		<p class="desc">
+			Node.jsでエクセルファイルを読み込み、テンプレートを用いてワードファイルにデータを流し込むプログラムです。
+			
+		</p>
+		
+		<p class="links">
+			<a href="https://github.com/botchi09/bingo-worksheet-node-docx-gen">GitHub</a>
+		</p>
+	</div>
+	
+	<div class="project">
+		<h3>Unityゲーム向けMODの拡張</h3>
+		<p class="desc">
+			GitHub上の既存のオープンソースMODをフォークして、C#のリフレクションライブラリを用いてゲームソフトに機能拡張や調整をしました。
+					
+		</p>
+		
+		<p class="links">
+			<a href="https://github.com/botchi09/Outward-Mods">GitHubのフォーク</a>
+		</p>
+	</div>
+
+
+</section>
+
+</main>
+
+<footer>
+2026
+</footer>
+
 </body>
 </html>

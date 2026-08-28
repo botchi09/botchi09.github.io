@@ -85,19 +85,122 @@
 	-->
 	
 	
-	
-	
-	
-	
-	
+	<div class="project ">
+		<h3>ボルダリングゲーム</h3>
+		<div class="desc">
+			<h3>概要</h3>
+			<p>宝石を拾い、柱を登るゲームです。いわゆる、縦向きの障害物コースゲームです。12月中旬にベータ版を公開しました。 マトリクス数学を使用し、プレイヤーの手がスムーズに動きながら障害物を乗り越えていくようにしました。</p>
+			<h4>開発の課題</h4>
+			<ul>
+				<li>カメラの向きを含めて、プレイヤーの手をスムーズに様々な障害物を乗り越えること。</li>
+				<li>パフォーマンスに影響を与えず、障害物を数多く描画すること。</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li>
+					<strong>手の動き方</strong>手前の障害物を検出するために、手の周囲に複数の球体のレイキャストを行い、障害物の衝突面を取得します。
+					カメラからマウス方向の線は衝突面に沿った平面で制約されています。これにより、障害物を自然に登れるようにしました。
+					
+				</li>
+				<li>
+					<strong>改善点</strong>この方法では凹面はうまく登れません。頂点で経路を見つけることで解決できると思います。
+				</li>
+				<li>
+					<strong>カスタムLODの実装</strong>登れる障害物が多く、一気に全部をレンダーすることがパフォーマンス的に不可能です。しかし、エンジン内のLODシステムは遠距離のものを表示せず、「無限に登れる」という没入感が損なわれます。
+					そのためにクライアント側で4段階のLODを実装しました。500ユニット以上離れたオブジェクトはただのブロック形ですが近距離では詳細なモデルを表示します。
+				</li>
+				<li>
+					<strong>改善点</strong>高速移動の時でも、素早くロードすることを検討しています。
+				</li>
+			</ul>
+			
+			
+		</div>
+		<div class="media">
+			<div class="media-video">
+				<iframe src="https://www.youtube.com/embed/bYzrbGG2mxw?si=ZhA0UERIeYFnVjjK" frameborder="0" allow="encrypted-media;picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+			</div>
+			<img class="media-img" src="bouldering.png">
+
+		</div>
+		<p class="links">
+			<a href="https://youtu.be/bYzrbGG2mxw">映像１</a>
+			<a href="https://youtu.be/_mRu7jwwfPQ">映像２</a>
+			<!--a href="https://github.com/botchi09/rblx-climb-game-framework">GitHub</a-->
+		</p>
+	</div>
 	
 	<div class="project">
-		<h3>魔法使いアクションゲームのプロトタイプ</h3>
-		<p class="desc">
-			「アーマード・コア」シリーズに影響を受けて魔法使い対戦ゲームのプロトタイプを自作しました。
-			ECS（エンティティ・コンポーネント・システム）で,簡単に技を実装できるようにしました。
-			カメラやキャラクター操作も自作しました。
+		<h3>ブロック工場</h3>
+		<div class="desc">
+			<h3>概要</h3>
+			<p>ブロックを掘り、加工して売るゲームです。 サーフェスネットを使用し、EditableMeshでボクセル構造のブロックを自由に変更することができます。 
+			UVマップを計算することでさまざまな種類のブロックを表示できます。</p>
+			<h4>開発の課題</h4>
+			<ul>
+				<li>プレイヤーがグリッドに沿って機械を設置できるようにすること。</li>
+				<li>ボクセル構成の立体を動的に変更し、最速にメッシュを再生成すること。</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li>
+					<strong>グリッド設置システム</strong>自由に機械を設置することが重視だと考えています。データ保存や設置のしやすさを考慮し、3次元グリッドを実装しました。
+					
+				</li>
+				<li>
+					<strong>改善点</strong>2次元の面に設置するのが簡単ですが、縦方向も考慮する必要があるために、階層切り替え機能も実装しましたが頻繁に「上」「下」ボタンを押す操作は不便だと感じています。
+					今後よりY軸方向へ設置するシステムの実装を目指しています。
+				</li>
+				<li>
+					<strong>ボクセル形状の変更</strong>1つの大きなブロックは8000(20³)個のボクセルで構成されます。しかし8000のパーツはパフォーマンス面に非常に高くなります。
+					そのままだと、角は鋭く、自然な見た目になりません。そのために、バイナリデータとして保存しました。単一EditableMeshで描画するために、サーフェスネットを実装しました。
+					このように、比較的にパフォーマンス負荷が軽く、更新しやすい立方体が生成できます。
+					それとも、UVマップも再利用することで、テクスチャのメモリー負荷が大幅に軽減できました。
+				</li>
+				<li>
+					<strong>改善点</strong>頂点数が多くて、メモリ負荷がかなり大きいです。可能な限り、LODを実装したいと考えています。また、メッシュ更新処理に時間がかかるため、並行処理を導入したいです。
+				</li>
+				
+			</ul>
+			
+			
+		</div>
+		<div class="media">
+			<div class="media-video">
+				<iframe src="https://www.youtube.com/embed/gCMYRTG_4xU?si=UzJkvlsYuFJQmUvD" frameborder="0" allow="encrypted-media;picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+			</div>
+
+		</div>
+		
+		
+		
+	</div>
+	
+	
+	
+	
+	
+
+	<div class="project">
+		<h3>水シミュレーション</h3>
+		<div class="desc">
+			<p>2.5Dでの大規模な水シミュレーションの実装です。
+			アクターを使用した並列処理によって、パフォーマンスを向上させました。
+			水面がボーンを使ってレンダリングしています。</p>
+		</div>
+		
+		<p class="links">
+			<a href="https://youtu.be/VPDNZFsSpMg">デモ映像１</a>
+			<a href="https://youtu.be/8iBMO5iZILQ">デモ映像１</a>
 		</p>
+	</div>
+	<div class="project">
+		<h3>魔法使いアクションゲームのプロトタイプ</h3>
+		<div class="desc">
+			<p>「アーマード・コア」シリーズに影響を受けて魔法使い対戦ゲームのプロトタイプを自作しました。
+			ECS（エンティティ・コンポーネント・システム）で,簡単に技を実装できるようにしました。
+			カメラやキャラクター操作も自作しました。</p>
+		</div>
 		
 		<p class="links">
 			<a href="spelldefexample.png">フレームワークの実装例</a>
@@ -106,47 +209,7 @@
 			<a href="https://github.com/botchi09/rblx-spellcasting-behavior-framework">GitHub</a>
 		</p>
 	</div>
-	
-	<div class="project ">
-		<h3>ボルダリングゲーム</h3>
-		<p class="desc">
-			宝石を拾い、柱を登るゲームです。いわゆる、縦向きの障害物コースゲームです。12月中旬にベータ版を公開しました。 マトリクス数学を使用し、プレイヤーの手がスムーズに動きながら障害物を乗り越えていくようにしました。
-		</p>
-		
-		<p class="links">
-			<a href="https://youtu.be/bYzrbGG2mxw">映像１</a>
-			<a href="https://youtu.be/_mRu7jwwfPQ">映像２</a>
-			<!--a href="https://github.com/botchi09/rblx-climb-game-framework">GitHub</a-->
-		</p>
-	</div>
-	
-	
-	<div class="project">
-		<h3>ブロック工場</h3>
-		<p class="desc">
-			ブロックを掘り、加工して売るゲームです。 サーフェスネットを使用し、EditableMeshでボクセル形状を自由に変更することができます。 
-			UVマップを計算することでさまざまな種類のブロックを表示できます。
-		</p>
-		
-		<p class="links">
-			<a href="https://youtu.be/gCMYRTG_4xU">映像</a>
-		</p>
-	</div>
-	<div class="project">
-		<h3>水シミュレーション</h3>
-		<p class="desc">
-			2.5Dでの大規模な水シミュレーションの実装です。
-			アクターを使用した並列処理によって、パフォーマンスを向上させました。
-			水面がボーンを使ってレンダリングしています。
-		</p>
-		
-		<p class="links">
-			<a href="https://youtu.be/VPDNZFsSpMg">デモ映像１</a>
-			<a href="https://youtu.be/8iBMO5iZILQ">デモ映像１</a>
-		</p>
-	</div>
-	
-	<div class="project">
+	<!--div class="project">
 		<h3>ハムスターボール決闘</h3>
 		<p class="desc">
 			Robloxのサーバー主導システムを使用し、ハムスターボールで対戦するゲームです。 ラグを感じにくい体験のために、プレイヤーの能力を工夫しました。
@@ -156,20 +219,19 @@
 			<a href="https://youtu.be/L8BhFeAakAs">映像</a>
 			
 		</p>
-	</div>
+	</div-->
 	
 	
 	<div class="project">
 		<h3>生成AIによるモデリングの実験</h3>
-		<p class="desc">
-			大規模言語モデル（LLM）を使って、CGやゲームレベルを作成する実験を行いました。
+		<div class="desc">
+			<p>大規模言語モデル（LLM）を使って、CGやゲームレベルを作成する実験を行いました。
 			現在のLLMの空間認識の能力を理解するために調査しました。
 			自分で考えたプロンプトを使って、複数のLLMにCGを生成させました。
 			プロンプトを研究してよい結果が得られるように調整しました。
 			AIエージェントが生成できるようにAI向けAPIを作りました。
-			調査したAIモデル：Gemini 3.1 Pro・Claude Sonnet 4.6・ChatGPT 5.2・Qwen 3.5 27B
-			
-		</p>
+			調査したAIモデル：Gemini 3.1 Pro・Claude Sonnet 4.6・ChatGPT 5.2・Qwen 3.5 27B</p>
+		</div>
 				
 		<p class="links">
 			<a href="prompt_results.png">デモ画面</a>
@@ -179,13 +241,12 @@
 	
 	<div class="project">
 		<h3>ロールバック方式ネットコードの実装</h3>
-		<p class="desc">
-			格闘ゲームで主流になっている「ロールバック方式ネットコード」を実装しました。
+		<div class="desc">
+			<p>格闘ゲームで主流になっている「ロールバック方式ネットコード」を実装しました。
 			
 			アニメーションやゲームシステムも自作しました。
-			「ロックステップ」方式ネットコードに比べ、操作レスポンスに優れています。
-			
-		</p>
+			「ロックステップ」方式ネットコードに比べ、操作レスポンスに優れています。</p>
+		</div>
 				
 		<p class="links">
 			<a class="" href="https://youtu.be/f2O9HNqwWwM">デモ映像１</a>
@@ -197,10 +258,10 @@
 	
 	<div class="project">
 		<h3>特定サイト向け自動情報取得ツール</h3>
-		<p class="desc">
-			Node.jsとPuppeteerを用いて、特定のウエブサイトの情報の自動取得プログラムです。
-			これまでのデータ入力作業を自動化しました。
-		</p>
+		<div class="desc">
+			<p>Node.jsとPuppeteerを用いて、特定のウエブサイトの情報の自動取得プログラムです。
+			これまでのデータ入力作業を自動化しました。</p>
+		</div>
 		
 		<p class="links">
 			<a href="scraper.png">画面キャプチャ</a>
@@ -210,10 +271,10 @@
 	
 	<div class="project">
 		<h3>TRPGのユーザーデータ管理アプリ</h3>
-		<p class="desc">
-			NW.jsを利用したデータ管理アプリです。
-			ウエブ技術を用いてデスクトップアプリを作成しました。
-		</p>
+		<div class="desc">
+			<p>NW.jsを利用したデータ管理アプリです。
+			ウエブ技術を用いてデスクトップアプリを作成しました。</p>
+		</div>
 		
 		<p class="links">
 			<a href="sosmanager1.png">画面キャプチャ１</a>
@@ -225,10 +286,9 @@
 
 	<div class="project">
 		<h3>エクセルとワードのファイルをデータ編集</h3>
-		<p class="desc">
-			Node.jsでエクセルファイルを読み込み、テンプレートを用いてワードファイルにデータを流し込むプログラムです。
-			
-		</p>
+		<div class="desc">
+			<p>Node.jsでエクセルファイルを読み込み、テンプレートを用いてワードファイルにデータを流し込むプログラムです。</p>
+		</div>
 		
 		<p class="links">
 			<a href="https://github.com/botchi09/bingo-worksheet-node-docx-gen">GitHub</a>
@@ -237,10 +297,9 @@
 	
 	<div class="project">
 		<h3>Unityゲーム向けMODの拡張</h3>
-		<p class="desc">
-			GitHub上の既存のオープンソースMODをフォークして、C#のリフレクションライブラリを用いてゲームソフトに機能拡張や調整をしました。
-					
-		</p>
+		<div class="desc">
+			<p>GitHub上の既存のオープンソースMODをフォークして、C#のリフレクションライブラリを用いてゲームソフトに機能拡張や調整をしました。</p>
+		</div>
 		
 		<p class="links">
 			<a href="https://github.com/botchi09/Outward-Mods">GitHubのフォーク</a>

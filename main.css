@@ -7,11 +7,6 @@
 	--surface:   #f7f8fa;
 	--border:    #e4e7ec;
 	--text:      #1c2027;
-	--text-muted:#5b6270;
-	--text-dim:  #8a90a0;
-	--accent:    #2f5ed6;   /* primary blue */
-	--accent-soft: #eef2fd;
-	--accent-2:  #178a5c;   /* small green accent, used sparingly */
 	--sans: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Segoe UI", Roboto, sans-serif;
 	--radius: 10px;
 }
@@ -218,14 +213,72 @@ footer {
 	font-size: 18px;
 	font-weight: 700;
 	color: var(--text);
+	border: none;
 }
+
+/* -----------------------------------------------------
+   description block (was a <p>, now a <div> so it can
+   legally contain headings/lists; text sized down and
+   its internal headings scaled to sit clearly *inside*
+   the project, well below the project title)
+   ----------------------------------------------------- */
 
 .desc {
 	margin: 0;
 	padding: 4px 20px 16px;
 	color: var(--text-muted);
 	font-size: 14.5px;
-	white-space: pre-line;
+}
+
+.desc p {
+	margin: 0 0 12px;
+}
+
+.desc p:last-child {
+	margin-bottom: 0;
+}
+
+.desc h3 {
+	/* sub-heading *inside* a project (e.g. "概要", "技術・実装") —
+	   deliberately much smaller than .project > h3, and its own
+	   distinct color so the two levels don't read as the same rank */
+	padding: 0;
+	margin: 16px 0 6px;
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--accent);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.desc h3:first-child {
+	margin-top: 0;
+}
+
+.desc h4 {
+	margin: 14px 0 6px;
+	font-size: 13.5px;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.desc ul {
+	margin: 0 0 12px;
+	padding-left: 20px;
+}
+
+.desc li {
+	margin-bottom: 8px;
+	font-size: 14px;
+}
+
+.desc li:last-child {
+	margin-bottom: 0;
+}
+
+.desc strong {
+	color: var(--text);
+	margin-right: 4px;
 }
 
 .tech {
@@ -236,68 +289,56 @@ footer {
 	font-weight: 600;
 }
 
-/* image gallery inside each project */
+/* -----------------------------------------------------
+   media (video + image) — consistent proportions,
+   no more raw stretched iframe/img side by side
+   ----------------------------------------------------- */
 
-.shots {
-	display: flex;
-	flex-wrap: wrap;
+.media {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 	gap: 12px;
 	padding: 0 20px 16px;
 }
 
-.shot {
-	display: block;
-	width: 220px;
-	max-width: 100%;
-	text-decoration: none;
-	color: var(--text-muted);
-	border: 1px solid var(--border);
+.media-video {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
 	border-radius: 8px;
 	overflow: hidden;
 	background: var(--surface);
-	transition: border-color 0.15s ease, transform 0.15s ease;
+	border: 1px solid var(--border);
 }
 
-.shot:hover {
-	border-color: var(--accent);
-	transform: translateY(-2px);
-	text-decoration: none;
-}
-
-.shot img {
-	display: block;
+.media-video iframe {
+	position: absolute;
+	inset: 0;
 	width: 100%;
-	height: 140px;
-	object-fit: cover;
+	height: 100%;
+	border: 0;
+}
+
+.media-img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: contain;
+	border-radius: 8px;
+	border: 1px solid var(--border);
 	background: var(--surface);
-	border-bottom: 1px solid var(--border);
-}
-
-.shot span {
 	display: block;
-	padding: 8px 10px;
-	font-size: 12.5px;
 }
 
-/* link buttons (video / github) beneath the gallery */
+/* link buttons (video / github) beneath the media/description */
 
 .links {
 	margin: 0;
-	padding: 4px 20px 20px;
+	padding: 14px 20px 20px;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
 	border-top: 1px solid var(--border);
 	background: var(--surface);
-}
-
-.links:first-child {
-	border-top: none;
-	background: none;
-}
-
-.project .links {
-	padding-top: 14px;
 }
 
 .links a {
@@ -344,8 +385,8 @@ footer {
 		font-weight: 600;
 	}
 
-	.shot {
-		width: calc(50% - 6px);
+	.media {
+		grid-template-columns: 1fr;
 	}
 }
 

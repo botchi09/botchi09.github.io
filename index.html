@@ -272,18 +272,49 @@
 	
 	<div class="project">
 		<h3>生成AIによるモデリングの実験</h3>
-		<p class="desc">
-			大規模言語モデル（LLM）を使って、CGやゲームレベルを作成する実験を行いました。
-			現在のLLMの空間認識の能力を理解するために調査しました。
-			自分で考えたプロンプトを使って、複数のLLMにCGを生成させました。
-			プロンプトを研究してよい結果が得られるように調整しました。
-			AIエージェントが生成できるようにAI向けAPIを作りました。
-			調査したAIモデル：Gemini 3.1 Pro・Claude Sonnet 4.6・ChatGPT 5.2・Qwen 3.5 27B
 			
-		</p>
+		<div class="desc">
+			<h3>概要</h3>
+			<p>大規模言語モデル（LLM）を使って、CGやゲームレベルを生成する実験を行いました。
+				現在のLLMの空間認識能力を理解するために調査しました。
+				自分で考案したプロンプトを使って、複数のLLMにCGを生成させました。
+				プロンプトを研究してよい結果が得られるように調整しました。
+				AIエージェントが生成できるようにAI向けのAPIを実装しました。。
+				調査したAIモデル：Gemini 3.1 Pro・Claude Sonnet 4.6・ChatGPT 5.2・Qwen 3.5 27B</p>
+			<h4>開発の課題</h4>
+			<ul>
+				<li>APIを制作し、ゲームレベルを制作すること</li>
+				<li>生成AIの空間認識を理解すること</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li>
+					<strong>APIを開発・研究</strong>LLMが解読しやすいAPIや指示を開発し、プロンプトのトークン数の削減や構文エラーを防ぐ文法を設計しました。
+					<strong>トークン数の削減</strong>トークンが多くなると品質が下がるため、トークナイザーで計りました。約１万トークン以内に収めることを目指しました。
+				</li>
 				
-				<div class="shots">
-			<a href="prompt_results.png" class="shot"><img src="prompt_results.png" alt="デモ画面" loading="lazy"><span>デモ画面</span></a>
+				
+				
+			</ul>
+			<h3>今後の改善点</h3>
+			<ul>
+				<li>
+					フィードバックループを改善したいと考えています。現代のLLMの空間認識が大幅に向上するため、スクリーンショットなどを撮って自動的に繰り返すことを実装したいです。
+				</li>
+				<li>
+					CGモデルの制作はうまくできていますが、モデルの配置精度が良くなかったです。例えば、椅子や机は作れますが、椅子が机から離れた場所に配置されています。
+					
+				</li>
+				<li>
+					LLMの独創性には問題があります。日常的ではないほど生成に失敗が多くなります。そのため人間による調整が必要です。
+				</li>
+			</ul>
+			
+		</div>
+		
+		<div class="media">
+		
+			<img class="media-img" src="prompt_results.png">
 		</div>
 		
 	</div>
@@ -304,19 +335,52 @@
 			<a href="https://github.com/botchi09/RobloxRollback">GitHub</a>
 		</p>
 	</div>
-	<!--div class="project todo">
-		<h3>TODO climbing game</h3>
-		<p class="desc">
-			vector math. picture demonstration!
-		</p>
-		
+	
+	
+	<div class="project ">
+		<h3>ボルダリングゲーム</h3>
+		<div class="desc">
+			<h3>概要</h3>
+			<p>宝石を拾い、柱を登るゲームです。いわゆる、縦向きの障害物コースゲームです。12月中旬にベータ版を公開しました。 マトリクス数学を使用し、プレイヤーの手がスムーズに動きながら障害物を乗り越えていくようにしました。</p>
+			<h4>開発の課題</h4>
+			<ul>
+				<li>カメラの向きを含めて、プレイヤーの手をスムーズに様々な障害物を乗り越えること。</li>
+				<li>パフォーマンスに影響を与えず、障害物を数多く描画すること。</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li>
+					<strong>手の動き方</strong>手前の障害物を検出するために、手の周囲に複数の球体のレイキャストを行い、障害物の衝突面を取得します。
+					カメラからマウス方向の線は衝突面に沿った平面で制約されています。これにより、障害物を自然に登れるようにしました。
+					
+				</li>
+				<li>
+					<strong>改善点</strong>この方法では凹面はうまく登れません。頂点で経路を見つけることで解決できると思います。
+				</li>
+				<li>
+					<strong>カスタムLODの実装</strong>登れる障害物が多く、一気に全部をレンダーすることがパフォーマンス的に不可能です。しかし、エンジン内のLODシステムは遠距離のものを表示せず、「無限に登れる」という没入感が損なわれます。
+					そのためにクライアント側で4段階のLODを実装しました。500ユニット以上離れたオブジェクトはただのブロック形ですが近距離では詳細なモデルを表示します。
+				</li>
+				<li>
+					<strong>改善点</strong>高速移動の時でも、素早くロードすることを検討しています。
+				</li>
+			</ul>
+			
+			
+		</div>
+		<div class="media">
+			<div class="media-video">
+				<iframe src="https://www.youtube.com/embed/bYzrbGG2mxw?si=ZhA0UERIeYFnVjjK" frameborder="0" allow="encrypted-media;picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+			</div>
+			<img class="media-img" src="bouldering.png">
+
+		</div>
 		<p class="links">
 			<a href="https://youtu.be/bYzrbGG2mxw">映像１</a>
 			<a href="https://youtu.be/_mRu7jwwfPQ">映像２</a>
-			<a href="https://github.com/botchi09/rblx-climb-game-framework">GitHub</a>
+			<!--a href="https://github.com/botchi09/rblx-climb-game-framework">GitHub</a-->
 		</p>
-	</div-->
-	
+	</div>
 	
 	
 	<div class="project">

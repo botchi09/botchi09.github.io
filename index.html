@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ホケット　ライアン・ポートフォリオ</title>
 	<link rel="stylesheet" href="main.css">
+	<!--09/03変更した -->
 </head>
 
 <body>
@@ -143,32 +144,126 @@
 	
 	<div class="project">
 		<h3>TRPGのユーザーデータ管理アプリ</h3>
-		<p class="desc">
-			NW.jsを利用したデータ管理アプリです。
-			ウエブ技術を用いてデスクトップアプリを作成しました。
-		</p>
-		
-				<div class="shots">
-			<a href="sosmanager1.png" class="shot"><img src="sosmanager1.png" alt="画面キャプチャ１" loading="lazy"><span>画面キャプチャ１</span></a>
-			<a href="sosmanager2.png" class="shot"><img src="sosmanager2.png" alt="画面キャプチャ２" loading="lazy"><span>画面キャプチャ２</span></a>
+		<div class="desc">
+			<h3>概要</h3>
+			<p>Node.jsでElectronのようなフレームワークを使い、データ管理アプリを開発しました。
+			ウエブ技術を用いてデスクトップアプリを開発しました。
+			アプリ内のデータ・画像について、作者から使用許可を取得しました。
+			</p>
+			<h3>開発の課題</h3>
+			<ul>
+				<li>JSONデータベースから読み取り、画面に表示すること</li>
+				<li>複雑なルールに沿って、分かりやすいUIの開発</li>
+				<li>データセーブ・ロードの機能の実装</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+
+				<li>
+					<strong>UX・UIの考案</strong>「ソング・オブ・ソードズ」だというゲームルールが複雑なため、分かりやすさを第一に考えました。防具の計算や同時に装備できる防具が特に多い、
+					自動的に計算することが必要になりました。そのために、ルールブックから取った画像をクリックするだけで装備可能な防具を確認できるように実装しました。
+					プレイヤーへのテストも実施し、プレイヤーからのフィードバックによってUIを調整しました。例えば、「防具の名前がはっきり覚えていない」と言うフィードバックがあったのでファジー検索を実装しました。
+					
+				</li>
+				<li>
+					<strong>データセーブ</strong>プレイヤーの入力したデータ配列をJSONにしました。装備がそれぞれの固有IDを持っているため、装備部位と装備の固有IDからデータキーを生成して保存できます。
+					
+				</li>
+				<li>
+					<strong>ルール正しさ</strong>このTRPGのルールが複雑なため、TRPG作者に連絡を取りました。ルールが不明な時、正確な実装をするように作者に問い合わせました。
+				</li>
+				
+				
+			</ul>
+			<h3>今後の改善点</h3>
+			<ul>
+				<li>
+					<strong>PDFファイルからデータの取り込み自動化</strong>現在はPDFから装備データをコピーし、プログラムや外部ツールを使って登録しています。今後はPDFデータを直接取り込めるようにしたいです。
+				<li>
+				<li>
+					<strong>ハードコーディングの削減</strong>追加内容やファンの変更よって、ルールが変わります。現在、装備データはJSONファイルから読み込みが装備の素材などは自動的ではありません。
+					
+				<li>
+				<li>
+					<strong>多言語</strong>世界中のプレイヤーが使えるように、多言語のUIを実装したいです。文字列の変更は実装しませんでした。
+					
+				<li>
+			</ul>
 		</div>
-		<p class="links">
+
+		<div class="media">
+	
+			<a href="sosmanager1.png"><img class="media-img" src="sosmanager1.png"></a>
+			<a href="sosmanager2.png"><img class="media-img" src="sosmanager2.png"></a>
+			
+
+		</div>
+		<!--p class="links">
 			<a href="https://github.com/botchi09/sos-equipment-manager">GitHub</a>
-		</p>
+		</p-->
 	</div>
 	
 	
 	
 	<div class="project">
-		<h3>特定サイト向け自動情報取得ツール</h3>
-		<p class="desc">
-			Node.jsとPuppeteerを用いて、特定のウエブサイトの情報の自動取得プログラムです。
-			これまでのデータ入力作業を自動化しました。
-		</p>
+		<h3>ECサイト向け自動情報取得ツール</h3>
 		
-				<div class="shots">
-			<a href="scraper.png" class="shot"><img src="scraper.png" alt="画面キャプチャ" loading="lazy"><span>画面キャプチャ</span></a>
+		
+		<div class="desc">
+			<h3>概要</h3>
+			<p>
+				Node.jsとPuppeteerを用いて、ウエブスクレイパーを実装しました。
+				取引先の商品が販売されているECサイトの価格データを利用するため、データを自動的に取得する仕組みを作りました。
+			</p>
+			<h3>開発の課題</h3>
+			<ul>
+				<li>ウエブサイトの操作を自動化すること</li>
+				<li>ウエブサイトからデータを取得し、CSVファイルで出力すること</li>
+				<li>ユーザーからのフィードバックを反映し、操作性・UXを改善すること</li>
+				<li>ウエブサイトのコードを解析し、必要なデータの取得方法を調査すること</li>
+			
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li><strong>ブラウザー操作</strong>「Puppeteer」というライブラリを使用し、自動でウエブサイトを操作しました。このECサイトの仕様上、ページ移動し、
+				HTTPリクエストを使用して商品データを取得しました。
+				</li>
+				<li>
+					<strong>プロジェクト企画</strong>以前はECサイトの商品情報を手作業でユーザーのスプレッドシートに入力していたので、商品情報の入力に約1か月かかりました。
+					なお、入力ミスが利益に影響する可能性がありました。ユーザーの操作を観察し、ヒアリングを行い、必要な機能を洗い出しました。
+					
+				</li>
+				<li>
+					<strong>ネットワークの検査</strong>このECサイトは大量のデータを読み込むため、ページを開くことが10秒をかかりました。原因を調査し、不要なURLをブロックしました。
+					また、商品データのURLを掘り出すためにHTTPリクエストの内容を調査しました。
+				</li>
+				<li>
+					<strong>ユーザーフィードバック</strong>今回、ユーザーフィードバックを特に重視し、販売業務に関わるアプリのためユーザーからのフィードバックを継続的に反映しました。
+					例えば、ECサイトの商品価格の計算ロジックについて、ユーザーと計算結果を照合し、結果に違いがあった場合、実装を調整しました。
+				</li>	
+				
+			</ul>
+			<h3>今後の改善点</h3>
+			<ul>
+				<li>
+					<strong>Puppeteerを使わないHTTPのみのデータ収集</strong>当初は、すべてHTTPリクエストのみでデータ収集することを目指していたが、原因が特定できなかった問題があったため、ページを実際に開く必要がありました。
+					この方法ではアプリの速度が低下しますが納期を優先し、ブラウザー操作プログラムとして実装しました。
+
+					現在はPuppeteerを使ってページ移動とログインを行い、ページ内で発生するHTTPリクエストから商品情報を取得しています。
+				<li>
+				<li>
+					<strong>直接Excelに書き込み</strong>ECデータは現在、CSVファイルに入力されていますが、エクセルに直接書き込めるようにすることで、UXを向上させることを目指しています。
+				<li>
+				<li>
+					<strong>設定GUI</strong>現在は設定をtxtファイルから読んでいます。ユーザーが直接に設定ファイルを編集するのは難しいため、設定を簡単に変更できるGUIを実装し、UXを向上させる予定です。
+				<li>
+			</ul>
 		</div>
+		<div class="media">
+	
+			<a href="scraper.png"><img class="media-img" src="scraper.png"></a>
+		</div>
+				
 		<p class="links">
 			<a href="https://github.com/botchi09/stone-website-puppeteer-scraper">GitHub</a>
 		</p>

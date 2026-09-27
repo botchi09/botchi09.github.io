@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ホケット　ライアン・ポートフォリオ</title>
+	<link rel="stylesheet" href="main.css">
+	<!--09/03変更した -->
+</head>
+
+<body>
+
+<header class="top">
+	<div class="top-inner">
+		<div class="name">
+			<h1>ホケット・ライアン</h1>
+			<p class="contact">
+				電話: 080-7891-9471　
+				メール: rhockett94@gmail.com　（メール優先）
+			</p>
+			
+			<p class="languages">
+			英語のネイティブ（イギリス人）　|　日本語 (独学、勉強中)
+			</p>
+			
+		
+		</div>
+
+		<nav>
+			<!--a href="#education">学歴</a>
+			<a href="#work">職歴</a-->
+			<!--a href="#skills">スキル</a-->
+			<a href="#portfolio">ポートフォリオ</a>
+		</nav>
+	</div>
+</header>
+
+<main>
+
+<section id="portfolio">
+	<h2>ポートフォリオ</h2>
+	<!--
+	<div class="project">
+		<h3>プロジェクト名</h3>
+		<p class="desc">
+			ここに簡単な説明を書きます。何を作ったのか、目的、特徴など。
+		</p>
+		<p class="tech">
+			使用技術: HTML / CSS / JavaScript
+		</p>
+		<p class="links">
+			<a href="#">デモ</a>
+			<a href="#">ソースコード</a>
+		</p>
+
+		<div class="media">
+			<div class="media-video">
+				<iframe src="https://www.youtube.com/embed/gCMYRTG_4xU?si=UzJkvlsYuFJQmUvD" frameborder="0" allow="encrypted-media;picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+			</div>
+
+		</div>
+	</div>
+	-->
+	
+
+	<div class="project" id="trpg-rulebook-search">
+		<h3>TRPGルールサーチ・検索拡張生成</h3>
+
+
+		<div class="desc">
+			<h3>概要</h3>
+				オープンソースのTRPGデータセットを使い、自然言語でルールブックを検索するシステムを実装しました。
+				このTRPGのルールは複雑なため、大規模言語モデル(LLM)でルールを検索できるシステムが必要でした。
+			<p>
+
+			</p>
+			
+			<h3>技術・実装</h3>
+			<ul>
+				<li>
+					<strong>データ収集・加工</strong>D&D第5版のルールをまとめたデータセットを見つけて、マークダウン形式データからJSON形式データに変換しました。
+					このデータセットがすべてコンテキストに収まらないため項目ごとに分割して一意なIDを付けました。
+					
+				</li>
+				<li>
+					<strong>LLMホスティング</strong>llama.cppで<a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-4B-GGUF">Nemotron3-Nano-4B</a> (Q4)を動かすサーバを立てました。コストパフォーマンスを重視して、クラウドモデルを使いませんでした。
+					Nvidia RTX3090では生成速度は120tpsでしたが、より小さいモデルなら200tps以上出ると思います。
+				<li>
+					<strong>ルール検索</strong>多段式の検索を行い、ルール検索システムを実装しました。
+					<ol>
+						<li>ユーザープロンプトを受け取ります。プロンプトを加工し、キーワードを洗い出し、意図を推測します。</li>
+						<li>約20個のキーワードを生成し、予備検索を行います。</li>
+						<li>キーワードをもとに、項目を選択します。</li>
+						<li>項目をもとに再帰的に検索します。もし結果が見つかったら、検索結果のリストに入れます。</li>
+						<li>結果をランキングする段階では検索結果をプロンプトと比較してどの程度一致しているかを1点から3点で評価します。</li>
+						<li>上位３件の結果をユーザーに表示します。</li>
+					</ol>
+					
+				</li>
+				<li>
+					<strong>UX・デザイン</strong>ただ答えを出すだけでは足りないと考えております。幻覚の問題もありますので、検索結果にリンクも表示します。
+					リンクを押すとページへ移動します。ユーザーが本文に記載されているルールを確認できるようにしました。
+				</li>
+				<li>
+					<strong>出力の一貫性</strong>4Bモデルを使うと、出力の一貫性を保証できません。JSON形式で出力することを保証するため、gnbf（出力用の文法）ファイルをリクエストごとに指定しました。 gnbfを使うと生成速度が低下するため再生成の回数を減らすことを優先しました。
+				</li>
+				<li>
+					<strong>キーワード検索</strong>キーワード検索が思ったより重要でした。小型モデルのため、誤った回答が多かったです。誤った結果を防ぐため、プロンプトに関連する単語を生成し、
+					キーワードに一致する項目を取り出し、項目選択の段階に注入しました。誤りの多い結果からほぼ正確な結果にしたので、大成功と考えています。
+				</li>
+				<li>
+					<strong>出力が拒否されること</strong>D&Dはファンタジーゲームなので、モンスターなどと戦うことが多くあります。
+					このように、プロンプトに暴力的な内容が含まれることが多いため、LLMによる回答の生成が拒否されることが多くありました。
+					<a href="https://huggingface.co/HauhauCS/Nemotron3-Nano-4B-Uncensored-HauhauCS-Aggressive">無制約のモデル</a>にはそれなりのリスクがありますが、不適切な出力が生成された場合、その責任はユーザー側にあります。
+					文法ファイルによって不適切な出力が生成しにくいため、トレードオフとなりました。
+					たとえば、「剣でゴブリンを攻撃したい」と入力したら、回答を拒否されてしまい、使えるものになりません。
+					
+					
+					
+				</li>
+			</ul>
+			
+			<h3>今後の改善点</h3>
+			<ul>
+				
+				<li><strong>モデルの選択</strong>現在、4BのLLM（エンコーダー・デコーダー）を使用しています。最初はGemma-3-270Mを使ってみましたが、ゲーム知識の面で問題がありました。
+					<a href="https://huggingface.co/datasets/jason-oneal/dnd-5e-dataset">質問・回答のデータセット</a>でポストトレーニングをしましたが十分な結果が得られませんでした。同モデルの1B版からも十分な結果が得られませんでしたので、Nemotron 4Bを使用しました。
+					なお、このNemotronは汎用モデルなのでRAG(検索拡張生成)用エンコーダーを使用したいと思います。
+					<a href="https://huggingface.co/nvidia/llama-nemotron-embed-vl-1b-v2-fp8">llama-nemotron-embed</a>を実装してみましたが、デコーダーも必要だったためひとまずLLMを使いました。
+					今度はパイソンでエンコーダーとデコーダーを分けて実装したいと思います。
+					さらに、二択で判定する段階（再帰検索）も、判定モデルを使いたいと思います。新しい技術であるため現在は実装していませんが、<a href="https://huggingface.co/sky7350/Mica-v0.1-4B">Mica</a>を利用することで、
+					性能や精度が大幅に向上すると考えています。
+					
+				</li>
+				<li>
+					<strong>ブラウザ上での推論</strong>現在、LLM推論をローカルで行っています。
+
+					それなりのコストがかかるため、ユーザーのブラウザ上でLLM推論を行う実装を試してみましたが推論速度が遅すぎて実装を断念しました。
+
+					より小型モデルを使えるようになれば、可能性が広がります。
+					
+				</li>
+			</ul>
+			
+		</div>
+
+		<div class="media">
+		
+			<img class="media-img" src="srd-rag.png">
+		</div>
+		<div class="media-video">
+			<iframe src="https://www.youtube.com/embed/XYZTOyIFa6o?si=GR5VIjRbFAJTNVbJ" frameborder="0" allow="encrypted-media;picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+		</div>
+	
+		
+	</div>
+
+	<div class="project" id="ec-scraper">
+		<h3>ECサイト向け自動情報取得ツール</h3>
+		
+		
+		<div class="desc">
+			<h3>概要</h3>
+			<p>
+				Node.jsとPuppeteerを用いて、ウエブスクレイパーを実装しました。
+				取引先の商品が販売されているECサイトの価格データを利用するため、データを自動的に取得する仕組みを作りました。
+			</p>
+			<h3>開発の課題</h3>
+			<ul>
+				<li>ウエブサイトの操作を自動化すること</li>
+				<li>ウエブサイトからデータを取得し、CSVファイルで出力すること</li>
+				<li>ユーザーからのフィードバックを反映し、操作性・UXを改善すること</li>
+				<li>ウエブサイトのコードを解析し、必要なデータの取得方法を調査すること</li>
+			
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li><strong>ブラウザー操作</strong>「Puppeteer」というライブラリを使用し、自動でウエブサイトを操作しました。このECサイトの仕様上、ページ移動し、
+				HTTPリクエストを使用して商品データを取得しました。
+				</li>
+				<li>
+					<strong>プロジェクト企画</strong>以前はECサイトの商品情報を手作業でユーザーのスプレッドシートに入力していたので、商品情報の入力に約1か月かかりました。
+					なお、入力ミスが利益に影響する可能性がありました。ユーザーの操作を観察し、ヒアリングを行い、必要な機能を洗い出しました。
+					
+				</li>
+				<li>
+					<strong>ネットワークの検査</strong>このECサイトは大量のデータを読み込むため、ページを開くことが10秒をかかりました。原因を調査し、不要なURLをブロックしました。
+					また、商品データのURLを掘り出すためにHTTPリクエストの内容を調査しました。
+				</li>
+				<li>
+					<strong>ユーザーフィードバック</strong>今回、ユーザーフィードバックを特に重視し、販売業務に関わるアプリのためユーザーからのフィードバックを継続的に反映しました。
+					例えば、ECサイトの商品価格の計算ロジックについて、ユーザーと計算結果を照合し、結果に違いがあった場合、実装を調整しました。
+				</li>	
+				
+			</ul>
+			<h3>今後の改善点</h3>
+			<ul>
+				<li>
+					<strong>Puppeteerを使わないHTTPのみのデータ収集</strong>当初は、すべてHTTPリクエストのみでデータ収集することを目指していたが、原因が特定できなかった問題があったため、ページを実際に開く必要がありました。
+					この方法ではアプリの速度が低下しますが納期を優先し、ブラウザー操作プログラムとして実装しました。
+
+					現在はPuppeteerを使ってページ移動とログインを行い、ページ内で発生するHTTPリクエストから商品情報を取得しています。
+				<li>
+				<li>
+					<strong>直接Excelに書き込み</strong>ECデータは現在、CSVファイルに入力されていますが、エクセルに直接書き込めるようにすることで、UXを向上させることを目指しています。
+				<li>
+				<li>
+					<strong>設定GUI</strong>現在は設定をtxtファイルから読んでいます。ユーザーが直接に設定ファイルを編集するのは難しいため、設定を簡単に変更できるGUIを実装し、UXを向上させる予定です。
+				<li>
+			</ul>
+		</div>
+		<div class="media">
+	
+			<a href="scraper.png"><img class="media-img" src="scraper.png"></a>
+		</div>
+				
+		<p class="links">
+			<a href="https://github.com/botchi09/stone-website-puppeteer-scraper">GitHub</a>
+		</p>
+	</div>
+
+	<div class="project" id="gen-ai-modeling">
+		<h3>生成AIによるモデリングの実験</h3>
+			
+		<div class="desc">
+			<h3>概要</h3>
+			<p>大規模言語モデル（LLM）を使って、CGやゲームレベルを生成する実験を行いました。
+				現在のLLMの空間認識能力を理解するために調査しました。
+				
+				プロンプトを研究してよい結果が得られるように調整しました。
+				DeepSeek 4.1を使用して、CGモデルでシーンを生成しました。
+			</p>
+			<h4>開発の課題</h4>
+			<ul>
+				<li>APIを制作し、ゲームレベルを制作すること</li>
+				<li>生成AIの空間認識を理解すること</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+				<li>
+					<strong>APIを開発・研究</strong>LLMが理解しやすいAPIや指示体系を開発し、プロンプトのトークン数の削減や構文エラーが発生しにくい文法を設計しました。
+					エラーがかなり多いため3回程度の再生成することが必要でした。
+					<strong>トークン数の削減</strong>トークンが多くなると品質が下がるため、トークナイザーで計りました。約１万トークン以内に収めることを目指しました。
+					<strong>生成エラーの防止</strong>現在、生成AIの空間知識能力が不十分のため、バウンディングボックスシステムを用いたシステムを実装しました。
+					一気にシーンを生成させるとモデル同士が重なて配置されてしまうことが多くあります。
+					それを防ぐために、ボックス以外の情報を取り除き、ユーザーが生成されたモデルを自由にアレンジできるようになるます。
+				</li>
+								
+			</ul>
+			<h3>今後の改善点</h3>
+			<ul>
+				<li>
+					フィードバックループを改善したいと考えています。現代のLLMの空間認識が大幅に向上するため、スクリーンショットなどを撮って自動的に繰り返すことを実装したいです。
+				</li>
+				
+				<li>
+					LLMの独創性には問題があります。日常的ではないほど生成に失敗が多くなります。そのため人間による調整が必要です。
+				</li>
+			</ul>
+			
+		</div>
+
+		
+		<div class="media-video">
+			<iframe src="https://www.youtube.com/embed/Lmt0cFwmr_M?si=j4mqM7-joYbOBYHR" frameborder="0" allow="encrypted-media;picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+		</div>
+		<div class="media">
+		
+			<img class="media-img" src="prompt_results.png">
+		</div>
+		
+	</div>
+	<div class="project" id="trpg-manager">
+		<h3>TRPGのユーザーデータ管理アプリ</h3>
+		<div class="desc">
+			<h3>概要</h3>
+			<p>Node.jsでElectronのようなフレームワークを使い、データ管理アプリを開発しました。
+			ウエブ技術を用いてデスクトップアプリを開発しました。
+			アプリ内のデータ・画像について、作者から使用許可を取得しました。
+			</p>
+			<h3>開発の課題</h3>
+			<ul>
+				<li>JSONデータベースから読み取り、画面に表示すること</li>
+				<li>複雑なルールに沿って、分かりやすいUIの開発</li>
+				<li>データセーブ・ロードの機能の実装</li>
+			</ul>
+			<h3>技術・実装</h3>
+			<ul>
+
+				<li>
+					<strong>UX・UIの考案</strong>「ソング・オブ・ソードズ」だというゲームルールが複雑なため、分かりやすさを第一に考えました。防具の計算や同時に装備できる防具が特に多い、
+					自動的に計算することが必要になりました。そのために、ルールブックから取った画像をクリックするだけで装備可能な防具を確認できるように実装しました。
+					プレイヤーへのテストも実施し、プレイヤーからのフィードバックによってUIを調整しました。例えば、「防具の名前がはっきり覚えていない」と言うフィードバックがあったのでファジー検索を実装しました。
+					
+				</li>
+				<li>
+					<strong>データセーブ</strong>プレイヤーの入力したデータ配列をJSONにしました。装備がそれぞれの固有IDを持っているため、装備部位と装備の固有IDからデータキーを生成して保存できます。
+					
+				</li>
+				<li>
+					<strong>ルール正しさ</strong>このTRPGのルールが複雑なため、TRPG作者に連絡を取りました。ルールが不明な時、正確な実装をするように作者に問い合わせました。
+				</li>
+				
+				
+			</ul>
+			<h3>今後の改善点</h3>
+			<ul>
+				<li>
+					<strong>PDFファイルからデータの取り込み自動化</strong>現在はPDFから装備データをコピーし、プログラムや外部ツールを使って登録しています。今後はPDFデータを直接取り込めるようにしたいです。
+				<li>
+				<li>
+					<strong>ハードコーディングの削減</strong>追加内容やファンの変更よって、ルールが変わります。現在、装備データはJSONファイルから読み込みが装備の素材などは自動的ではありません。
+					
+				<li>
+				<li>
+					<strong>多言語</strong>世界中のプレイヤーが使えるように、多言語のUIを実装したいです。文字列の変更は実装しませんでした。
+					
+				<li>
+			</ul>
+		</div>
+
+		<div class="media">
+	
+			<a href="sosmanager1.png"><img class="media-img" src="sosmanager1.png"></a>
+			<a href="sosmanager2.png"><img class="media-img" src="sosmanager2.png"></a>
+			
+
+		</div>
+		<!--p class="links">
+			<a href="https://github.com/botchi09/sos-equipment-manager">GitHub</a>
+		</p-->
+	</div>
+	
+	<!--div class="project">
+		<h3>ハムスターボール決闘</h3>
+		<p class="desc">
+			Robloxのサーバー主導システムを使用し、ハムスターボールで対戦するゲームです。 ラグを感じにくい体験のために、プレイヤーの能力を工夫しました。
+		</p>
+		
+		<p class="links">
+			<a href="https://youtu.be/L8BhFeAakAs">映像</a>
+			
+		</p>
+	</div-->
+	
+	
+	
+
+	<div class="project" id="excel-word-editor">
+		<h3>エクセルとワードのファイルをデータ編集</h3>
+		<div class="desc">
+			<p>Node.jsでエクセルファイルを読み込み、テンプレートを用いてワードファイルにデータを流し込むプログラムです。</p>
+		</div>
+		
+		<p class="links">
+			<a href="https://github.com/botchi09/bingo-worksheet-node-docx-gen">GitHub</a>
+		</p>
+	</div>
+	
+	<div class="project" id="unity-mods">
+		<h3>Unityゲーム向けMODの拡張</h3>
+		<div class="desc">
+			<p>GitHub上の既存のオープンソースMODをフォークして、C#のリフレクションライブラリを用いてゲームソフトに機能拡張や調整をしました。</p>
+		</div>
+		
+		<p class="links">
+			<a href="https://github.com/botchi09/Outward-Mods">GitHubのフォーク</a>
+		</p>
+	</div>
+
+
+</section>
+
+</main>
+
+<footer>
+2026
+</footer>
+
+</body>
+</html>
